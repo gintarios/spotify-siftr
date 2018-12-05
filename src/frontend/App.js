@@ -3,6 +3,8 @@ import './App.css';
 import SpotifyWebApi from 'spotify-web-api-js';
 import GetTracks from './data/GetTracks'
 import NowPlaying from './data/NowPlaying'
+import SearchBox from './views/SearchBox'
+import GenresGrid from './views/GenresGrid';
 
 const spotifyApi = new SpotifyWebApi();
 
@@ -54,10 +56,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <a href='http://localhost:8888' > Login to Spotify </a>
+        <a href='http://localhost:8888' > Login to Siftr </a>
+        <SearchBox />
         <div>
           <NowPlaying />
           <GetTracks />
+          <GenresGrid />
         </div>
       </div>
     );

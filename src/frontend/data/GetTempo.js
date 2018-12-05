@@ -6,7 +6,7 @@ class GetTempo extends Component {
 
     getTempo(){
         let searchStr = 'eric clapton'
-        spotifyApi.searchTracks(searchStr)
+        spotifyApi.getAudioAnalysisForTrack(trackid, fn)
             .then((response) => {
                 console.log(`Search for ${searchStr}`, response);
             })

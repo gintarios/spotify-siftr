@@ -4,17 +4,27 @@ const spotifyApi = new SpotifyWebApi();
 
 class GetTracks extends Component {
 
-    getTracks(){
-        let searchStr = 'eric clapton'
+    getPlaylists(){
+        let searchStr = 'jazz'
         spotifyApi.searchTracks(searchStr)
             .then((response) => {
                 console.log(`Search for ${searchStr}`, response);
+            })
+    }
+
+    getTracks(){
+        let playlistId = '2KSM2x2rFmY4GKWwRm9qRg'
+        spotifyApi.getPlaylist(playlistId).then((response) => {
+                console.log(`Search for ${playlistId}`, response);
             })
     }
     
     render() {
         return(
         <div>
+            <button onClick={() => this.getPlaylists()}>
+                Get Playlist Data
+            </button>
             <button onClick={() => this.getTracks()}>
                 Get Track Data
             </button>
