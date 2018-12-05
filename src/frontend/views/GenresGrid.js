@@ -1,19 +1,18 @@
 import React from 'react';
 import Genres from '../data/Genres'
-
-
+import './genres-grid.css'
 
 const GenresGrid = () => {
     return(
-        <div>
             <div className='genre-container'>
-                {Genres.map((genre) => {
+                    {Genres.map((genre) => {
                     return (
-                        <img src={require(`../data/images/rock.jpg`)} alt ='genre'  />
+                        <div className='genre-item'>
+                            <img src={require(`../data/images/${genre.id}.jpg`)} alt ='genre'  />
+                        </div>
                     )    
                 })}
             </div>
-        </div>
         )
     }
 
