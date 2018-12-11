@@ -1,30 +1,25 @@
 {
-  "name": "fit-your-goal",
+  "name": "better-playlists",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
-    "react-scripts": "2.1.1",
-    "cookie-parser": "1.3.2",
-    "express": "~4.0.0",
-    "querystring": "~0.2.0",
-    "request": "~2.34.0",
-    "spotify-web-api-js": "^0.22.1"
+    "npm-run-all": "^4.1.5",
+    "query-string": "^5.0.0",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-scripts": "1.0.11",
+    "reset-css": "^2.2.1",
+    "spotify-web-api-js": "^1.1.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start-dev": "npm-run-all start-frontend _start-hot-server",
+    "start-frontend": "react-scripts start",
+    "start-backend": "node src/backend/oauth/server.js",
+    "start": "NODE_ENV=production npm-run-all -s build _start-cold-server",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "_start-hot-server": "nodemon src/backend/oauth/server.js",
+    "_start-cold-server": "node src/backend/oauth/server.js"
+  }
 }
