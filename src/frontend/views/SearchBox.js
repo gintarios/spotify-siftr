@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import './searchBox.css';
-
+// import './searchBox.css';
 
 class SearchBox extends Component {
 
     setSearchStr(){
         let searchStr = 'input text'
     }
-
-
 render() {
 return(
 <div>
@@ -19,6 +16,4 @@ return(
 </div>
 )}
 }
-
 export default SearchBox;
-
