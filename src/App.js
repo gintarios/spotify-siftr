@@ -1,15 +1,10 @@
-import React, { Component } from "react";
-import "./App.css";
+import React, { Component } from 'react';
 import 'reset-css/reset.css';
+import './App.css';
 import queryString from 'query-string';
 import genrePlaylists from './genrePlaylists';
-import SpotifyWebApi from "spotify-web-api-js";
-import Header from "./views/Header";
-// import GetTracks from "./data/GetTracks";
-import NowPlaying from "./data/NowPlaying";
-import GenresGrid from "./views/GenresGrid";
-
-const spotifyApi = new SpotifyWebApi();
+import Header from './frontend/views/Header'
+import SearchBox from './frontend/views/SearchBox'
 
 function isEven(number) {
   return number % 2
@@ -35,31 +30,11 @@ class Playlist extends Component {
 class App extends Component {
   constructor() {
     super();
-    const params = this.getHashParams();
-    const token = params.access_token;
-    if (token) {
-      spotifyApi.setAccessToken(token);
-    }
     this.state = {
       serverData: {},
-      filterString: '',
-      loggedIn: token ? true : false,
-      nowPlaying: { name: "Not Checked", albumArt: "" }
-    };
-  }
-  getHashParams() {
-    var hashParams = {};
-    var e,
-      r = /([^&;=]+)=?([^&;]*)/g,
-      q = window.location.hash.substring(1);
-    e = r.exec(q);
-    while (e) {
-      hashParams[e[1]] = decodeURIComponent(e[2]);
-      e = r.exec(q);
+      filterString: ''
     }
-    return hashParams;
   }
-
   componentDidMount() {
     let parsed = queryString.parse(window.location.search);
     let accessToken = parsed.access_token;
@@ -140,25 +115,20 @@ class App extends Component {
     })
     }))
   }
-
   render() {
     let playlistToRender = 
-    this.state.user && 
-    this.state.playlists 
-      ? this.state.playlists.filter(playlist => {
-        let matchesPlaylist = playlist.name.toLowerCase().includes(
-          this.state.filterString.toLowerCase()) 
-        let matchesSong = playlist.songs.find(song => song.name.toLowerCase()
-          .includes(this.state.filterString.toLowerCase()))
-        return matchesPlaylist || matchesSong
-      }) : []
-    return (
+      this.state.user && 
+      this.state.playlists 
+        ? this.state.playlists.filter(playlist => {
+          let matchesPlaylist = playlist.name.toLowerCase().includes(
+            this.state.filterString.toLowerCase()) 
+          let matchesSong = playlist.songs.find(song => song.name.toLowerCase()
+            .includes(this.state.filterString.toLowerCase()))
+          return matchesPlaylist || matchesSong
+        }) : []
+    return ( // if user is logged in display the code between ? and : otherwise 
       <div className="App">
         <Header />
-        <a href="http://localhost:8888"> Login to Spotify </a>
-        <NowPlaying />
-        {/* <GetTracks /> */}
-        <GenresGrid />
         {this.state.user ?
           <div>
             <br/>{this.state.rocktracks}
@@ -185,14 +155,14 @@ class App extends Component {
           {playlistToRender.map((playlist, i) => 
             <Playlist playlist={playlist} index={i} />
           )}
-        </div>
+          </div>
            : 
           <button onClick={() => {
             window.location = window.location.href.includes('localhost') 
               ? 'http://localhost:8888/login' 
               : 'https://better-playlists-backend.herokuapp.com/login' }
           }
-          >Sign in with Spotify</button>
+          style={{padding: '20px', 'fontSize': '50px', 'marginTop': '20px'}}>Sign in with Spotify</button>
         }
       </div>
     );
