@@ -1,5 +1,4 @@
 import React from "react";
-import "../App.css";
 import SearchBox from "./SearchBox";
 
 const Header = () => {
