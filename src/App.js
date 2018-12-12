@@ -5,6 +5,8 @@ import queryString from "query-string";
 import genrePlaylists from "./genrePlaylists";
 import Header from "./frontend/views/Header";
 import SearchBox from "./frontend/views/SearchBox";
+import FetchTracks from './frontend/data/getPlaylistTracks'
+
 
 function isEven(number) {
   return number % 2;
@@ -46,6 +48,7 @@ class App extends Component {
       .then(response => response.json())
       .then(data =>
         this.setState({
+          accessToken: accessToken,
           user: {
             name: data.display_name,
             bday: data.birthdate,
@@ -62,26 +65,6 @@ class App extends Component {
           }
         })
       );
-
-    // fetch('https://open.spotify.com/user/grahamhewett/playlist/2KSM2x2rFmY4GKWwRm9qRg?si=vbhRnIhfSriNejYfxd1gFQ', {
-    //   headers: {'Authorization': 'Bearer ' + accessToken}
-    // }).then(response => response.json())
-    fetch(
-      "https://api.spotify.com/v1/playlists/2ihY1sy2Eask1kLJME0UhG/tracks",
-      {
-        headers: { Authorization: "Bearer " + accessToken }
-      }
-    )
-      .then(response => response.json())
-      .then(ptracks => {
-        let pnames = ptracks.items.map(song => song.track.name);
-        var randomNames = [];
-        let limit = 10;
-        for (let i = 0; i < limit; i++) {
-          randomNames.push(pnames[Math.floor(Math.random() * pnames.length)]);
-        }
-        this.setState({ rocktracks: randomNames });
-      });
 
     fetch("https://api.spotify.com/v1/me/playlists", {
       headers: { Authorization: "Bearer " + accessToken }
@@ -145,20 +128,9 @@ class App extends Component {
         <Header />
         {this.state.user ? (
           <div>
-            <br />
-            {this.state.rocktracks}
+            <FetchTracks acToken = {this.state.accessToken} />
             <br />
             {this.state.user.name}
-            <br />
-            {this.state.user.display_name}
-            <br />
-            {this.state.user.birthdate}
-            <br />
-            {this.state.user.country}
-            <br />
-            {this.state.user.email}
-            {/* <br/>{this.state.user.external_urls}
-            <br/>{this.state.user.followers} */}
             <br />
             {this.state.user.href}
             <br />
@@ -168,14 +140,7 @@ class App extends Component {
             {this.state.user.product}
             <br />
             {this.state.user.type}
-            <br />
-            {this.state.user.uri}
             <h1>{this.state.user.name}'s Playlists</h1>
-            {/* <PlaylistCounter playlists={playlistToRender}/>
-          <HoursCounter playlists={playlistToRender}/>
-          <Filter onTextChange={text => {
-              this.setState({filterString: text})
-            }}/> */}
             {playlistToRender.map((playlist, i) => (
               <Playlist playlist={playlist} index={i} />
             ))}
