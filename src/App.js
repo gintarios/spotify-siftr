@@ -23,7 +23,6 @@ class App extends Component {
     let genre = genrePlaylists.find(obj => obj.genre === "rock").playlistId;
     this.setState({accessToken: accessToken});
     if (!accessToken) return;
-
   }
   render() {
     let playlistToRender =

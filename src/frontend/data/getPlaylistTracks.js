@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './getPlaylistTracks.css'
 
 
 function msConvert(time) {
@@ -21,20 +22,21 @@ export default class FetchTracks extends Component {
     )
       .then(response => response.json())
       .then(ptracks => {
-        let pnames = ptracks.items.map(song => 
-        [
-          song.track.name,
-          song.track.duration_ms,
-          song.track.popularity,
-          song.track.href
-        ]);
+        let pnames = ptracks.items.map(song =>
+          [
+            song.track.name,
+            song.track.artists[0].name,
+            song.track.album.name,
+            song.track.duration_ms,
+            song.track.popularity
+          ]);
         let randomNames = [];
-        let limit = 10;
+        let limit = 20;
         for (let i = 0; i < limit; i++) {
-                var randomNumber = Math.floor(Math.random() * pnames.length - 1)
-                randomNames.push(pnames[randomNumber]);
-              }
-        this.setState({rockTracks: randomNames});
+          var randomNumber = Math.floor(Math.random() * pnames.length - 1)
+          randomNames.push(pnames[randomNumber]);
+        }
+        this.setState({ rockTracks: randomNames });
       });
   }
   render() {
@@ -44,23 +46,39 @@ export default class FetchTracks extends Component {
       )
     } else {
       return (
-        <div> {
-          this.state.rockTracks.map(track => {
-            return (
-              <div className="trackDeets">
-                <div className="trackName">
-                  {track[0]}
-                </div>
-                <div className="trackName">
-                  {msConvert(track[1])}
-                </div>
-                <div className="trackName">
-                  {track[2]}
-                </div>
-                </div>
-            )
-          })
-        }</div>
+        <div className="bigBoy">
+        <div className="parent"> 
+        <div className="title">Track name</div>
+        <div className="title">Artist</div>
+        <div className="title">Album</div>
+        <div className="title">Track Length</div>
+        <div className="title">Popularity</div>
+        </div>
+        {
+  this.state.rockTracks.map(track => {
+    return (
+      <div className="trackDeets">
+        <div className="trackName">
+        {track[0]}
+        </div>
+        <div className="trackName">
+          {(track[1])}
+        </div>
+        <div className="trackName">
+          {track[2]}
+        </div>
+        <div className="trackName">
+          {msConvert(track[3])}
+        </div>
+        <div className="trackName">
+          {track[4]}
+        </div>
+      </div>
+    )
+  })
+}</div> 
+          
+
       );
     }
   }
