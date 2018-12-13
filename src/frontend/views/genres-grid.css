@@ -1,0 +1,23 @@
+.genre-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: 100px;
+}
+
+.genre-item {
+    position: relative;
+    flex: 1;
+    flex-basis: 350px;
+    box-sizing: border-box;
+    margin: 50px;
+}
+
+img {
+    height: 100%;
+    width: 100%;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-bottom: 25px;
+    /* background-image: linerar-gradient(rgba(0,0,0, 0.9));  */
+}
