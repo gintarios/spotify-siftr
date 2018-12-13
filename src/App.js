@@ -6,6 +6,7 @@ import genrePlaylists from "./genrePlaylists";
 import Header from "./frontend/views/Header";
 import FetchTracks from './frontend/data/getPlaylistTracks'
 import UserData from './frontend/data/getUserData'
+import GenresGrid from "./frontend/views/GenresGrid";
 
 
 class App extends Component {
@@ -61,6 +62,7 @@ class App extends Component {
             Sign in with Spotify
           </button>
         )}
+      <GenresGrid />
       </div>
     );
           }else{
