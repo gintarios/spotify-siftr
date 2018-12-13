@@ -4,8 +4,8 @@ import "./App.css";
 import queryString from "query-string";
 // import genrePlaylists from "./genrePlaylists";
 import Header from "./frontend/views/Header";
-import FetchTracks from "./frontend/data/getPlaylistTracks";
-import UserData from "./frontend/data/getUserData";
+import FetchTracks from './frontend/data/FetchTracks'
+import UserData from './frontend/data/getUserData'
 import GenresGrid from "./frontend/views/GenresGrid";
 import Buttons from "./frontend/views/Buttons";
 
@@ -53,7 +53,6 @@ class App extends Component {
           <GenresGrid />
           {<UserData acToken={this.state.accessToken} /> ? (
             <div>
-              {/* <UserData acToken={this.state.accessToken} /> */}
               <FetchTracks acToken={this.state.accessToken} />
             </div>
           ) : (
