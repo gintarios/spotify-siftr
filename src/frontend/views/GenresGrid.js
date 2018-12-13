@@ -8,7 +8,6 @@ function setGenreSearch(genre) {
 
 const GenresGrid = () => {
     return(
-        <div>
             <div className='genre-container'>
                     {Genres.map((genre) => {
                     return (
@@ -19,7 +18,6 @@ const GenresGrid = () => {
                     )    
                 })}
             </div>
-        </div>
         )
     }
 
