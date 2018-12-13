@@ -102,6 +102,7 @@ class App extends Component {
       // if user is logged in display the code between ? and : otherwise
     <div className="App">
       <Header />
+      <GenresGrid />
         {<UserData acToken = {this.state.accessToken}/>? (
           <div>
             <UserData acToken = {this.state.accessToken}/>
@@ -119,7 +120,6 @@ class App extends Component {
             Sign in with Spotify
           </button>
         )}
-      <GenresGrid />
       </div>
     );
           }else{
