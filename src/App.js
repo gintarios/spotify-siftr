@@ -4,30 +4,9 @@ import "./App.css";
 import queryString from "query-string";
 import genrePlaylists from "./genrePlaylists";
 import Header from "./frontend/views/Header";
-import SearchBox from "./frontend/views/SearchBox";
 import FetchTracks from './frontend/data/getPlaylistTracks'
+import UserData from './frontend/data/getUserData'
 
-
-function isEven(number) {
-  return number % 2;
-}
-
-class Playlist extends Component {
-  render() {
-    let playlist = this.props.playlist;
-    return (
-      <div className="playlist">
-        <h2>{playlist.name}</h2>
-        <img src={playlist.imageUrl} alt="" />
-        <ul>
-          {playlist.songs.map(song => (
-            <li>{song.name}</li>
-          ))}
-        </ul>
-      </div>
-    );
-  }
-}
 
 class App extends Component {
   constructor() {
@@ -41,30 +20,9 @@ class App extends Component {
     let parsed = queryString.parse(window.location.search);
     let accessToken = parsed.access_token;
     let genre = genrePlaylists.find(obj => obj.genre === "rock").playlistId;
+    this.setState({accessToken: accessToken});
     if (!accessToken) return;
-    fetch("https://api.spotify.com/v1/me", {
-      headers: { Authorization: "Bearer " + accessToken }
-    })
-      .then(response => response.json())
-      .then(data =>
-        this.setState({
-          accessToken: accessToken,
-          user: {
-            name: data.display_name,
-            bday: data.birthdate,
-            location: data.country,
-            email: data.email,
-            ext: data.external_urls,
-            followers: data.followers,
-            href: data.href,
-            id: data.id,
-            images: data.images,
-            subscriptions: data.product,
-            type: data.type,
-            uri: data.uri
-          }
-        })
-      );
+
 
     fetch("https://api.spotify.com/v1/me/playlists", {
       headers: { Authorization: "Bearer " + accessToken }
@@ -122,28 +80,15 @@ class App extends Component {
             return matchesPlaylist || matchesSong;
           })
         : [];
+        if(this.state.accessToken){
     return (
       // if user is logged in display the code between ? and : otherwise
-      <div className="App">
-        <Header />
-        {this.state.user ? (
+    <div className="App">
+      <Header />
+        {<UserData acToken = {this.state.accessToken}/>? (
           <div>
+            <UserData acToken = {this.state.accessToken}/>
             <FetchTracks acToken = {this.state.accessToken} />
-            <br />
-            {this.state.user.name}
-            <br />
-            {this.state.user.href}
-            <br />
-            {this.state.user.id}
-            {/* <br/>{this.state.user.images} */}
-            <br />
-            {this.state.user.product}
-            <br />
-            {this.state.user.type}
-            <h1>{this.state.user.name}'s Playlists</h1>
-            {playlistToRender.map((playlist, i) => (
-              <Playlist playlist={playlist} index={i} />
-            ))}
           </div>
         ) : (
           <button
@@ -159,6 +104,9 @@ class App extends Component {
         )}
       </div>
     );
+          }else{
+            return <div><Header /></div>
+          }
   }
 }
 
