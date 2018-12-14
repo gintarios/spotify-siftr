@@ -10,7 +10,6 @@ import GenresGrid from "./frontend/views/GenresGrid";
 import Buttons from "./frontend/views/Buttons";
 
 class App extends Component {
-
   constructor() {
     super();
     this.state = {
@@ -23,12 +22,12 @@ class App extends Component {
     let parsed = queryString.parse(window.location.search);
     let accessToken = parsed.access_token;
     // let genre = genrePlaylists.find(obj => obj.genre === "rock").playlistId;
-    this.setState({accessToken: accessToken});
+    this.setState({ accessToken: accessToken });
     if (!accessToken) return;
   }
 
   goToSpotify() {
-    console.log('XX will redirect');
+    console.log("XX will redirect");
   }
 
   render() {
@@ -46,30 +45,35 @@ class App extends Component {
     //         return matchesPlaylist || matchesSong;
     //       })
     //     : [];
-        if(this.state.accessToken){
-    return (
-      // if user is logged in display the code between ? and : otherwise
-    <div className="App">
-      <Header />
-      <GenresGrid />
-        {<UserData acToken = {this.state.accessToken}/>? (
-          <div>
-            <UserData acToken = {this.state.accessToken}/>
-            <FetchTracks acToken = {this.state.accessToken} />
-          </div>
-        ) : (
-          <button
-            onClick={() => this.goToSpotify()}
-            style={{ padding: "20px", fontSize: "50px", marginTop: "20px" }}
-          >
-            Sign in with Spotify
-          </button>
-        )}
-      </div>
-    );
-          }else{
-            return <div><Header /></div>
-          }
+    if (this.state.accessToken) {
+      return (
+        // if user is logged in display the code between ? and : otherwise
+        <div className="App">
+          <Header />
+          <GenresGrid />
+          {<UserData acToken={this.state.accessToken} /> ? (
+            <div>
+              {/* <UserData acToken={this.state.accessToken} /> */}
+              <FetchTracks acToken={this.state.accessToken} />
+            </div>
+          ) : (
+            <button
+              onClick={() => this.goToSpotify()}
+              style={{ padding: "20px", fontSize: "50px", marginTop: "20px" }}
+            >
+              Sign in with Spotify
+            </button>
+          )}
+          <Buttons />
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <Header />
+        </div>
+      );
+    }
   }
 }
 
