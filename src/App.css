@@ -6,7 +6,7 @@
 
 html,
 body {
-  background-color: rgb(235, 235, 235);
+  background-color: white;
   color: #555;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   font-size: 18px;
@@ -45,10 +45,6 @@ body {
   line-height: 30px;
 }
 
-
-
 h1 {
   padding-top: 15%;
 }
-
-
