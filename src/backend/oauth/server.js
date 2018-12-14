@@ -1,6 +1,7 @@
 let express = require('express')
 let request = require('request')
 let querystring = require('querystring')
+let path = require('path')
 
 let app = express()
 
@@ -40,6 +41,12 @@ app.get('/callback', function(req, res) {
     res.redirect(uri + '?access_token=' + access_token)
   })
 })
+
+app.use(express.static(path.join(__dirname, '../../../build')));
+
+app.get('*', function (req, res) {
+  res.sendFile(path.join(__dirname, '../../../build', 'index.html'));
+});
 
 let port = process.env.PORT || 8888
 console.log(`Listening on port ${port}. Go /login to initiate authentication flow.`)
