@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "reset-css/reset.css";
 import "./App.css";
 import queryString from "query-string";
-import genrePlaylists from "./genrePlaylists";
+// import genrePlaylists from "./genrePlaylists";
 import Header from "./frontend/views/Header";
 import FetchTracks from './frontend/data/getPlaylistTracks'
 import UserData from './frontend/data/getUserData'
@@ -22,7 +22,7 @@ class App extends Component {
   componentDidMount() {
     let parsed = queryString.parse(window.location.search);
     let accessToken = parsed.access_token;
-    let genre = genrePlaylists.find(obj => obj.genre === "rock").playlistId;
+    // let genre = genrePlaylists.find(obj => obj.genre === "rock").playlistId;
     this.setState({accessToken: accessToken});
     if (!accessToken) return;
   }
@@ -32,20 +32,20 @@ class App extends Component {
   }
 
   render() {
-    let playlistToRender =
-      this.state.user && this.state.playlists
-        ? this.state.playlists.filter(playlist => {
-            let matchesPlaylist = playlist.name
-              .toLowerCase()
-              .includes(this.state.filterString.toLowerCase());
-            let matchesSong = playlist.songs.find(song =>
-              song.name
-                .toLowerCase()
-                .includes(this.state.filterString.toLowerCase())
-            );
-            return matchesPlaylist || matchesSong;
-          })
-        : [];
+    // let playlistToRender =
+    //   this.state.user && this.state.playlists
+    //     ? this.state.playlists.filter(playlist => {
+    //         let matchesPlaylist = playlist.name
+    //           .toLowerCase()
+    //           .includes(this.state.filterString.toLowerCase());
+    //         let matchesSong = playlist.songs.find(song =>
+    //           song.name
+    //             .toLowerCase()
+    //             .includes(this.state.filterString.toLowerCase())
+    //         );
+    //         return matchesPlaylist || matchesSong;
+    //       })
+    //     : [];
         if(this.state.accessToken){
     return (
       // if user is logged in display the code between ? and : otherwise

@@ -1,7 +1,7 @@
 import React from "react";
 // import logoSiftr from "./images/favicon.ico.PNG";
 import "./Header.css";
-import getUserData from "../data/getUserData";
+// import getUserData from "../data/getUserData";
 
 const Header = () => {
   return (
