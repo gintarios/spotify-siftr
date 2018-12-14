@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import './getPlaylistTracks.css'
+import starPop from './StarPop'
 
 
-function msConvert(time) {
-  return `${Math.floor(time / 60000)} : ${Math.round(time % 60000 / 1000)}`
+function msConvert(millis) {
+  var minutes = Math.floor(millis / 60000);
+  var seconds = ((millis % 60000) / 1000).toFixed(0);
+  return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
 }
 
 export default class FetchTracks extends Component {
@@ -46,6 +49,7 @@ export default class FetchTracks extends Component {
       )
     } else {
       return (
+        <div className="grandad">
         <div className="bigBoy">
         <div className="parent"> 
         <div className="title">Track name</div>
@@ -70,13 +74,14 @@ export default class FetchTracks extends Component {
         <div className="trackName">
           {msConvert(track[3])}
         </div>
-        <div className="trackName">
-          {track[4]}
+        <div className="star1">
+          {starPop(track[4])}
         </div>
       </div>
     )
   })
-}</div> 
+}</div>
+</div> 
           
 
       );

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./Buttons.css";
-import FetchTracks from "../data/getPlaylistTracks";
+import FetchTracks from "../data/FetchTracks";
 
 class Buttons extends Component {
   constructor() {
