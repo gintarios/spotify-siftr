@@ -13,6 +13,7 @@ import Slider from './frontend/views/slider'
 
 
 class App extends Component {
+
   constructor() {
     super();
     this.state = {
