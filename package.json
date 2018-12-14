@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "nodemon": "^1.18.8",
     "npm-run-all": "^4.1.5",
     "query-string": "^5.0.0",
     "react": "^15.6.1",
@@ -15,7 +16,7 @@
     "start-dev": "npm-run-all -p start-frontend _start-hot-server",
     "start-frontend": "react-scripts start",
     "start-backend": "node src/backend/oauth/server.js",
-    "start": "NODE_ENV=production npm-run-all -s build _start-cold-server",
+    "start": "npm-run-all -s build _start-cold-server",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
