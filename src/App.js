@@ -8,6 +8,7 @@ import FetchTracks from './frontend/data/FetchTracks'
 import UserData from './frontend/data/getUserData'
 import GenresGrid from "./frontend/views/GenresGrid";
 import Buttons from "./frontend/views/Buttons";
+import fetTracksUtil from "./frontend/data/fetchTracksUtil";
 
 class App extends Component {
   constructor() {
@@ -19,11 +20,20 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.getTracks();
+  }
+
+  getTracks() {
     let parsed = queryString.parse(window.location.search);
     let accessToken = parsed.access_token;
     // let genre = genrePlaylists.find(obj => obj.genre === "rock").playlistId;
-    this.setState({ accessToken: accessToken });
     if (!accessToken) return;
+    fetTracksUtil(accessToken).then(randomNames => {
+      this.setState({
+        randomisedTracks: randomNames,
+        accessToken
+      })
+    })
   }
 
   goToSpotify() {
@@ -31,29 +41,15 @@ class App extends Component {
   }
 
   render() {
-    // let playlistToRender =
-    //   this.state.user && this.state.playlists
-    //     ? this.state.playlists.filter(playlist => {
-    //         let matchesPlaylist = playlist.name
-    //           .toLowerCase()
-    //           .includes(this.state.filterString.toLowerCase());
-    //         let matchesSong = playlist.songs.find(song =>
-    //           song.name
-    //             .toLowerCase()
-    //             .includes(this.state.filterString.toLowerCase())
-    //         );
-    //         return matchesPlaylist || matchesSong;
-    //       })
-    //     : [];
     if (this.state.accessToken) {
       return (
         // if user is logged in display the code between ? and : otherwise
         <div className="App">
-          <Header />
+          {/* <Header /> needs to be re thought*/}
           <GenresGrid />
           {<UserData acToken={this.state.accessToken} /> ? (
             <div>
-              <FetchTracks acToken={this.state.accessToken} />
+              <FetchTracks tracks={this.state.randomisedTracks} />
             </div>
           ) : (
             <button
@@ -63,9 +59,9 @@ class App extends Component {
               Sign in with Spotify
             </button>
           )}
-          <Buttons />
+          <Buttons onGenerate={() => this.getTracks()} />
         </div>
-      );
+      );  
     } else {
       return (
         <div>
