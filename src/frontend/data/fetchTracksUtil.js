@@ -1,4 +1,4 @@
-export default function fetTracksUtil(token) {
+export default function fetchTracksUtil(token, limit) {
     return fetch(
       "https://api.spotify.com/v1/playlists/2ihY1sy2Eask1kLJME0UhG/tracks",
       {
@@ -13,10 +13,10 @@ export default function fetTracksUtil(token) {
             song.track.artists[0].name,
             song.track.album.name,
             song.track.duration_ms,
-            song.track.popularity
+            song.track.popularity,
+            song.track.uri
           ]);
         let randomNames = [];
-        let limit = 20;
         for (let i = 0; i < limit; i++) {
           var randomNumber = Math.floor(Math.random() * pnames.length - 1)
           randomNames.push(pnames[randomNumber]);
