@@ -11,6 +11,7 @@ import fetchTracksUtil from "./frontend/data/fetchTracksUtil";
 import LoggedInHeader from './frontend/views/loggedInHeader'
 import Slider from './frontend/views/slider'
 
+
 class App extends Component {
   constructor() {
     super();
@@ -30,7 +31,7 @@ class App extends Component {
     let accessToken = parsed.access_token;
     if (!accessToken) return;
     fetchTracksUtil(accessToken, this.state.limit).then(randomNames => {
-      this.setState({
+        this.setState({
         randomisedTracks: randomNames,
         accessToken
       })
@@ -62,10 +63,12 @@ class App extends Component {
               >
                 Sign in with Spotify
             </button>
+
             )}
+
           <Buttons onGenerate={() => this.getTracks()} />
         </div>
-      );
+      );  
     } else {
       return (
         <div>
