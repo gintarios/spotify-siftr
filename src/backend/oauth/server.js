@@ -12,7 +12,7 @@ app.get('/login', function(req, res) {
     querystring.stringify({
       response_type: 'code',
       client_id: '9a83fea5e2d04504a311aee6166ef775',
-      scope: 'user-read-private user-read-email playlist-modify-public playlist-modify-public',
+      scope: 'user-read-private user-read-email playlist-modify-private playlist-modify-public',
       redirect_uri
     }))
 })

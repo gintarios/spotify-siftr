@@ -12,7 +12,6 @@ import LoggedInHeader from './frontend/views/loggedInHeader'
 import Slider from './frontend/views/slider'
 import CreatePLaylist from './frontend/features/CreatePlaylist.js'
 
-
 class App extends Component {
 
   constructor() {
@@ -70,14 +69,13 @@ createNewPlaylist(token, trackUris, user) {
         .then(response => response.json())
         .then(newPlaylist => this.fillPlaylist(token , trackUris, newPlaylist.id))
 }
-fillPlaylist(token, trackUris) {
-  var playlistId = 'spotify:user:grahamhewett:playlist:1ZMFd7OxnTR030K9wMA15n'
-
-    return fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks,`,
+fillPlaylist(token, trackUris, playlistId) {
+    console.log(JSON.stringify({'uris': trackUris}));
+    return fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks?position=0&uris=spotify:track:4iV5W9uYEdYUVa79Axb7Rh,spotify:track:63OFKbMaZSDZ4wtesuuq6f`,
     {
-        headers: { Authorization: "Bearer " + token, 'Content-Type': 'application/json' },
+        headers: { Authorization: "Bearer " + token},
         method: "POST",
-        body: JSON.stringify({"uris": trackUris})
+        body: JSON.stringify({uris: trackUris})
     })
 }
 
@@ -121,5 +119,4 @@ fillPlaylist(token, trackUris) {
     }
   }
 }
-
 export default App;
