@@ -38,13 +38,47 @@ class App extends Component {
         accessToken
       })
     })
-    return this.state.randomisedTracks ? CreatePLaylist(accessToken, this.state.randomisedTracks) :
-    <div>Loading .....</div>
   }
 
   goToSpotify() {
     console.log("XX will redirect");
   }
+
+  CreatePlaylist(token, tracks) {
+    let trackUris = tracks.map(track => track[5])
+    this.getUserId(token, trackUris)
+}
+  getUserId(token, trackUris){
+    return fetch("https://api.spotify.com/v1/me", {
+      headers: { Authorization: "Bearer " + token }
+    })
+      .then(response => response.json())
+      .then(data => this.createNewPlaylist(token, trackUris, data.id))
+}
+
+createNewPlaylist(token, trackUris, user) {
+    return fetch(`https://api.spotify.com/v1/users/${user}/playlists`,
+    {
+        headers: { Authorization: "Bearer " + token },
+        method: "POST",
+        body: {
+            "name": "Siftr Playlist",
+            "description": "New Siftr Playlist",
+            "public": false
+          }
+    })
+        .then(response => response.json())
+        .then(newPlaylist => this.fillPlaylist(token , trackUris, newPlaylist.id))
+}
+   
+fillPlaylist(token, trackUris, playlistId) {
+    return fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks,`,
+    {
+        headers: { Authorization: "Bearer " + token },
+        method: "POST",
+        body: {"uris": trackUris}
+    })
+}
 
   render() {
     if (this.state.accessToken) {
@@ -61,15 +95,19 @@ class App extends Component {
               <FetchTracks tracks={this.state.randomisedTracks} />
             </div>
           ) : (
-              <button
+              <div>
+                <button
                 onClick={() => this.goToSpotify()}
                 style={{ padding: "20px", fontSize: "50px", marginTop: "20px" }}
-              >
-                Sign in with Spotify
-            </button>
+                >
+                  Sign in with Spotify
+                </button>
+
+                </div>   
 
             )}
-
+                <button onClick = {() => this.CreatePlaylist(this.state.accessToken, this.state.randomisedTracks)}> 
+                  Add to your playlist </button>
           <Buttons onGenerate={() => this.getTracks()} />
         </div>
       );  

@@ -39,4 +39,3 @@ function fillPlaylist(token, trackUris, playlistId) {
         body: {"uris": trackUris}
     })
 }
-

@@ -11,10 +11,10 @@ const GenresGrid = () => {
     <div className = "section-genresGrid">
       <h1> Looking for music ? </h1>
       <div className="genre-container">
-        {Genres.map(genre => {
+        {Genres.map((genre, i) => {
           return (
             <div
-              className="genre-item"
+              key= {i} className="genre-item"
               onClick={() => setGenreSearch(genre.genre.toLowerCase())}
             >
               <img src={require(`./${genre.id}.jpg`)} alt="genre" />
