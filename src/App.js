@@ -59,24 +59,25 @@ class App extends Component {
 createNewPlaylist(token, trackUris, user) {
     return fetch(`https://api.spotify.com/v1/users/${user}/playlists`,
     {
-        headers: { Authorization: "Bearer " + token },
+        headers: { Authorization: "Bearer " + token, 'Content-Type': 'application/json' },
         method: "POST",
-        body: {
+        body: JSON.stringify({
             "name": "Siftr Playlist",
             "description": "New Siftr Playlist",
             "public": false
-          }
+          })
     })
         .then(response => response.json())
         .then(newPlaylist => this.fillPlaylist(token , trackUris, newPlaylist.id))
 }
-   
-fillPlaylist(token, trackUris, playlistId) {
+fillPlaylist(token, trackUris) {
+  var playlistId = 'spotify:user:grahamhewett:playlist:1ZMFd7OxnTR030K9wMA15n'
+
     return fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks,`,
     {
-        headers: { Authorization: "Bearer " + token },
+        headers: { Authorization: "Bearer " + token, 'Content-Type': 'application/json' },
         method: "POST",
-        body: {"uris": trackUris}
+        body: JSON.stringify({"uris": trackUris})
     })
 }
 
