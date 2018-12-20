@@ -25,5 +25,6 @@
     "eject": "react-scripts eject",
     "_start-hot-server": "nodemon src/backend/oauth/server.js",
     "_start-cold-server": "node src/backend/oauth/server.js"
-  }
+  },
+  "proxy": "http://localhost:8888" 
 }

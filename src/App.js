@@ -10,6 +10,7 @@ import Buttons from "./frontend/views/Buttons";
 import fetchTracksUtil from "./frontend/data/fetchTracksUtil";
 import LoggedInHeader from './frontend/views/loggedInHeader'
 import Slider from './frontend/views/slider'
+import CreatePLaylist from './frontend/features/CreatePlaylist.js'
 
 
 class App extends Component {
@@ -37,6 +38,8 @@ class App extends Component {
         accessToken
       })
     })
+    return this.state.randomisedTracks ? CreatePLaylist(accessToken, this.state.randomisedTracks) :
+    <div>Loading .....</div>
   }
 
   goToSpotify() {
