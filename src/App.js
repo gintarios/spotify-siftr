@@ -38,11 +38,6 @@ class App extends Component {
       })
     })
   }
-
-  goToSpotify() {
-    console.log('XX will redirect');
-  }
-
   CreatePlaylist(token, tracks) {
     let trackUris = tracks.map(track => track[5])
     this.getUserId(token, trackUris)
@@ -70,7 +65,7 @@ createNewPlaylist(token, trackUris, user) {
         .then(newPlaylist => this.fillPlaylist(token , trackUris, newPlaylist.id))
 }
 fillPlaylist(token, trackUris, playlistId) {
-    console.log(JSON.stringify({'uris': trackUris}));
+    // console.log(JSON.stringify({'uris': trackUris}));
     return fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks?position=0&uris=spotify:track:4iV5W9uYEdYUVa79Axb7Rh,spotify:track:63OFKbMaZSDZ4wtesuuq6f`,
     {
         headers: { Authorization: "Bearer " + token},
@@ -78,7 +73,6 @@ fillPlaylist(token, trackUris, playlistId) {
         body: JSON.stringify({uris: trackUris})
     })
 }
-
   render() {
     if (this.state.accessToken) {
       return (
