@@ -41,7 +41,7 @@ class App extends Component {
   }
 
   goToSpotify() {
-    console.log("XX will redirect");
+    console.log('XX will redirect');
   }
 
   CreatePlaylist(token, tracks) {
