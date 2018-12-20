@@ -5,7 +5,7 @@ class Slider extends Component {
 
     render() {
        return (
-            <div class="slidecontainer">
+            <div className="slidecontainer">
             <input 
                 type="range" min="10" max="50" className= "slider" id="myRange" 
                 value={this.props.limit}

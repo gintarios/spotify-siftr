@@ -15,7 +15,7 @@ export default function fetchTracksUtil(token, limit) {
             song.track.album.name,
             song.track.duration_ms,
             song.track.popularity,
-            song.track.uri
+            song.track.uri,
           ]);
         let randomNames = [];
 

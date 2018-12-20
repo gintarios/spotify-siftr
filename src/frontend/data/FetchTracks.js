@@ -27,9 +27,9 @@ export default class FetchTracks extends Component {
               <div className="title">Popularity</div>
             </div>
             {
-              this.props.tracks.map(track => {
+              this.props.tracks.map((track, i) => {
                 return (
-                  <div className="trackDeets">
+                  <div key = {`track ${i}`} className="trackDeets">
                     <div className="trackName">
                       {track[0]}
                     </div>

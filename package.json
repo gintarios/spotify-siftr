@@ -16,7 +16,7 @@
     "spotify-web-api-js": "^1.1.1"
   },
   "scripts": {
-    "start-dev": "npm-run-all -p start-frontend _start-hot-server",
+    "start-dev": "npm-run-all -p start-frontend _start-cold-server",
     "start-frontend": "react-scripts start",
     "start-backend": "node src/backend/oauth/server.js",
     "start": "npm-run-all -s build _start-cold-server",
@@ -25,5 +25,6 @@
     "eject": "react-scripts eject",
     "_start-hot-server": "nodemon src/backend/oauth/server.js",
     "_start-cold-server": "node src/backend/oauth/server.js"
-  }
+  },
+  "proxy": "http://localhost:8888" 
 }
