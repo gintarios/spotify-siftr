@@ -39,7 +39,7 @@ class App extends Component {
     })
   }
   CreatePlaylist(token, tracks) {
-    let trackUris = tracks.map(track => track[5])
+    let trackUris = tracks.map(track => track[5]).join(',');
     this.getUserId(token, trackUris)
 }
   getUserId(token, trackUris){
@@ -65,8 +65,7 @@ createNewPlaylist(token, trackUris, user) {
         .then(newPlaylist => this.fillPlaylist(token , trackUris, newPlaylist.id))
 }
 fillPlaylist(token, trackUris, playlistId) {
-    // console.log(JSON.stringify({'uris': trackUris}));
-    return fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks?position=0&uris=spotify:track:4iV5W9uYEdYUVa79Axb7Rh,spotify:track:63OFKbMaZSDZ4wtesuuq6f`,
+    return fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks?position=0&uris=${trackUris}`,
     {
         headers: { Authorization: "Bearer " + token},
         method: "POST",
