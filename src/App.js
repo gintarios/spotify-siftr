@@ -73,10 +73,9 @@ fillPlaylist(token, trackUris, playlistId) {
     {
         headers: { Authorization: "Bearer " + token},
         method: "POST",
-        body: JSON.stringify({ uris: trackUris })
-      }
-    );
-  }
+        body: JSON.stringify({uris: trackUris})
+    }).then(alert('Rock On! All tracks have been added to Siftr PLaylist on your spotify account.'))
+}
   render() {
     if (this.state.accessToken) {
       return (

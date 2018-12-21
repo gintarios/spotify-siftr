@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./getPlaylistTracks.css";
 import starPop from "./StarPop";
-import AOS from "aos";
 
 function msConvert(millis) {
   var minutes = Math.floor(millis / 60000);
@@ -11,12 +10,11 @@ function msConvert(millis) {
 
 export default class FetchTracks extends Component {
   render() {
-    AOS.init();
     if (this.props.tracks.length === 0) {
       return <div>loading..</div>;
     } else {
       return (
-        <div className="grandad" data-aos="fade-left">
+        <div className="grandad">
           <div className="bigBoy">
             <div className="parent">
               <div className="title">Track name</div>
