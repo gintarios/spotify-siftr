@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import "./UserData.css";
 
 export default class UserData extends Component {
   constructor() {
     super();
     this.state = {
-        user:[]
-    }
+      user: []
+    };
   }
   componentDidMount() {
     fetch("https://api.spotify.com/v1/me", {
@@ -32,13 +33,22 @@ export default class UserData extends Component {
       );
   }
   render() {
-      if(this.state.user.length === 0){
-          return <div>loading..</div>
-      }else{
-        return(
-            <div>{this.state.user.name}</div> 
-         )
-      }
-    
+    if (this.state.user.length === 0) {
+      return <div>loading..</div>;
+    } else {
+      return (
+        <div className="section-getUserData">
+          <div className="getUserData-box" />
+          <div className="getUserData-box">
+            <div className="getUserData-box-2">
+              <h2>Welcome, {this.state.user.name}</h2>
+            </div>
+            <div className="getUserData-box-2">
+              <button> Log out of Spotify</button>
+            </div>
+          </div>
+        </div>
+      );
+    }
   }
 }

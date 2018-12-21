@@ -12,14 +12,9 @@ class Buttons extends Component {
     return (
       <div className="button-container">
         <div className="button-box">
-          <button onClick={() => this.props.onGenerate()}>
-            Generate
-          </button>
+          <button onClick={() => this.props.onGenerate()}>Generate</button>
         </div>
-        <div className="button-box">
-          <button> Add to your playlist </button>
-        </div>
-      </div>     
+      </div>
     );
   }
 }
