@@ -70,7 +70,7 @@ fillPlaylist(token, trackUris, playlistId) {
         headers: { Authorization: "Bearer " + token},
         method: "POST",
         body: JSON.stringify({uris: trackUris})
-    }).then(console.log(trackUris))
+    })
 }
   render() {
     if (this.state.accessToken) {
