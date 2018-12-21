@@ -1,10 +1,7 @@
-export default function fetchTracksUtil(token, limit) {
-  return fetch(
-    "https://api.spotify.com/v1/playlists/2ihY1sy2Eask1kLJME0UhG/tracks",
-    {
-      headers: { Authorization: "Bearer " + token }
-    }
-  )
+export default function fetchTracksUtil(token, limit, genre) {
+  return fetch(`https://api.spotify.com/v1/playlists/${genre}/tracks`, {
+    headers: { Authorization: "Bearer " + token }
+  })
     .then(response => response.json())
     .then(ptracks => {
       let pnames = ptracks.items.map(song => [
